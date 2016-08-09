@@ -8,6 +8,7 @@
 <form class="form-horizontal" method="POST" action="{{ url('/users/'.$user->id) }}">
 <fieldset>
 
+{{-- Spoofing method --}}
 {{ method_field('PUT') }}
 
 {{ csrf_field() }}
@@ -33,20 +34,11 @@
   </div>
 </div>
 
-<!-- Password input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="password">Password</label>
-  <div class="col-md-4">
-    <input id="password" name="password" type="password" placeholder="" class="form-control input-md" required="" value="{{ $user->password }}">
-    
-  </div>
-</div>
-
 <!-- Button (Double) -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
   <div class="col-md-8">
-    <button id="submit" name="submit" class="btn btn-success">Create</button>
+    <button id="submit" name="submit" class="btn btn-success">Update</button>
     <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
   </div>
 </div>
