@@ -27,10 +27,15 @@
 					<a href="{{ url('/users/'.$user->id) }}" class="btn btn-primary btn-sm">
 						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 					</a>
+
 					<a href="{{ url('/users/'.$user->id.'/edit') }}" class="btn btn-warning btn-sm">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 					</a>
-					<a href="{{ url('/users/'.$user->id) }}" class="btn btn-danger btn-sm" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure?">
+
+					<a href="{{ url('/users/'.$user->id) }}" class="btn btn-danger btn-sm" 
+					data-method="delete" 
+					data-token="{{csrf_token()}}" 
+					data-confirm="Are you sure?">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 					</a>
 
@@ -52,3 +57,22 @@
 @section('scripts')
 	<script type="text/javascript" src="{{ url('/js/app.js') }}"></script>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
