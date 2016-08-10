@@ -16,3 +16,9 @@ $factory->define(App\Task::class, function (Faker\Generator $faker) {
         'status' => $faker->randomElement(['New','In Progress','Done'])
     ];
 });
+
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->text
+    ];
+});

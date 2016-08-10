@@ -17,6 +17,8 @@ Route::resource('users', 'UsersController');
 
 Route::resource('tasks', 'TasksController');
 
+Route::resource('posts', 'PostsController');
+
 // 1. Set route name / url
 // 2. Set target controller@method being use for this route
 Route::get('profile', 'ProfileController@index');
