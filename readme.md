@@ -79,6 +79,8 @@ Open up your `app/Http/routes.php`, and add a Route group and include the middle
 		Route::resource('tasks', 'TasksController');
 	});
 
+You may logout from your application and try to access `http://localhost:8000/tasks`. You will be redirect to login page if you're not logged in yet.
+
 # How to create one-to-many relationship
 
 ## Create migration script
