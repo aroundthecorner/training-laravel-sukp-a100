@@ -81,9 +81,19 @@ Open up your `app/Http/routes.php`, and add a Route group and include the middle
 
 You may logout from your application and try to access `http://localhost:8000/tasks`. You will be redirect to login page if you're not logged in yet.
 
-The other way to setup the middleware is as following:
+The other option to setup the middleware is as following:
 
 	Route::get('profile','UsersControllers@profile')->middleware(['auth']);
+
+The last option to set restricted page is to use in controller's constructor.
+
+	class HomeController extends Controller
+	{
+	    public function __construct()
+	    {
+	        $this->middleware('auth');
+	    }
+	}
 
 # How to create one-to-many relationship
 
