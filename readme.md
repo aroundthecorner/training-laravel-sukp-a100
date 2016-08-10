@@ -18,9 +18,15 @@
 
 	php artisan make:migration add_user_id_fk_tasks --table=tasks
 	
-### in `timestamp_add_user_id_fk_tasks`
+### Open `database/migrations/<timestamp>_add_user_id_fk_tasks` and add in method `up()`
 
-	$table->integer('user_id')->unsigned()->after('id');
+	Schema::table('tasks', function (Blueprint $table) {
+        $table->integer('user_id')->unsigned()->after('id');
+    });
+
+### Do migrate
+
+	php artisan migrate
 
 ## Update Model
 
@@ -55,15 +61,26 @@
 
 	php artisan make:seeder TasksSeeder
 
-### Update TaskSeeders
-
-### Add `Task` namespace
+### Open `database\seeds\TasksSeeder` and add `Task` namespace
 
 	use App\Task;
 
-### In `run()` method
+### In `database\seeds\TasksSeeder` and in `run()` method, add the following
+
 	Task::truncate();
 	factory(Task::class, 100)->create();
+
+## Open `database\seeds\DatabaseSeeder`, and update the code to the following
+
+	public function run()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        $this->call(UsersSeeder::class);
+        $this->call(TasksSeeder::class);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
 
 ## Start seeding
 
