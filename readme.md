@@ -43,14 +43,26 @@ You may now access `http://localhost:8000/`. You should be able to see a welcome
 
 ## Open up `app/Http/Controlles/TasksController.php` and update the `index`,`show`,`edit` and `create` method to load their view
 
-	return view('tasks.index');
+	public function index()
+	{
+		return view('tasks.index');
+	}
 
-	return view('tasks.create');
+	public function create()
+	{
+		return view('tasks.create');
+	}
 
-	return view('tasks.edit');
+	public function edit($id)
+	{
+		return view('tasks.edit');
+	}
 
-	return view('tasks.show');
-
+	public function show($id)
+	{
+		return view('tasks.show');
+	}
+	
 ## Open up each views and update the views with the following template
 
 	@extends('layouts.app')
