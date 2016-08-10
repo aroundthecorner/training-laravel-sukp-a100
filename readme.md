@@ -71,6 +71,14 @@ You may now access `http://localhost:8000/`. You should be able to see a welcome
 
 	@endsection
 
+# How to create a restricted page (require username and password)
+
+Open up your `app/Http/routes.php`, and add a Route group and include the middleware for the group like the following
+
+	Route::group(['middleware' => ['auth']], function() {
+		Route::resource('tasks', 'TasksController');
+	});
+
 # How to create one-to-many relationship
 
 ## Create migration script
