@@ -12,12 +12,52 @@
 
 5. Run `php artisan serve` to serve the application to browser.
 
-# How to authenticated application
+# How to create an authenticated application
 
 Open up the terminal and go to the application directory. 
 Then run the following to create a login, register and forget password page.
 
 	php artisan make:auth
+
+You may now access `http://localhost:8000/`. You should be able to see a welcome page with navigation to login and register page.
+
+# How to create a page
+
+## Define route in `app/Http/routes.php`
+
+	Route::resource('tasks','TasksController');
+
+## Create controller
+
+	php artisan make:controller TasksController --resource
+
+## Create views in `resources/views` with following structure
+
+	resources/
+		|--views/
+			|--tasks/
+				|--create.blade.php
+				|--edit.blade.php
+				|--index.blade.php
+				|--show.blade.php
+
+## Open up `app/Http/Controlles/TasksController.php` and update the `index`,`show`,`edit` and `create` method to load their view
+
+	return view('tasks.index');
+
+	return view('tasks.create');
+
+	return view('tasks.edit');
+
+	return view('tasks.show');
+
+## Open up each views and update the views with the following template
+
+	@extends('layouts.app')
+
+	@section('content')
+
+	@endsection
 
 # How to create one-to-many relationship
 
