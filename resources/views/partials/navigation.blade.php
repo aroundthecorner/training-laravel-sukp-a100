@@ -20,8 +20,10 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/home') }}">Home</a></li>
-                <li><a href="{{ url('/about') }}">About Us</a></li>
-                <li><a href="{{ url('/contact') }}">Contact Us</a></li>
+                @unless(Auth::guest())
+                    <li><a href="{{ url('/users') }}">Users Manager</a></li>
+                    <li><a href="{{ url('/tasks') }}">Tasks Manager</a></li>
+                @endunless
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -37,7 +39,11 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li><a href="{{ url('/about') }}">About Us</a></li>
+                            <li><a href="{{ url('/contact') }}">Contact Us</a></li>
+                            <li>
+                                <a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
+                            </li>
                         </ul>
                     </li>
                 @endif

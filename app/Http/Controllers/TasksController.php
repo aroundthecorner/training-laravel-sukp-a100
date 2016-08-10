@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Http\Requests\TaskRequest;
+
 use App\Task;
 
 class TasksController extends Controller
@@ -37,7 +39,7 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
         Task::create($request->input());
         return redirect('/tasks');
@@ -74,7 +76,7 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskRequest $request, $id)
     {
         Task::find($id)->update($request->input());
         return redirect('/tasks');
