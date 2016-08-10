@@ -12,6 +12,13 @@
 
 5. Run `php artisan serve` to serve the application to browser.
 
+# How to authenticated application
+
+Open up the terminal and go to the application directory. 
+Then run the following to create a login, register and forget password page.
+
+	php artisan make:auth
+
 # How to create one-to-many relationship
 
 ## Create migration script
