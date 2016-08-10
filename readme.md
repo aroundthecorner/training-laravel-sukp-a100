@@ -81,6 +81,10 @@ Open up your `app/Http/routes.php`, and add a Route group and include the middle
 
 You may logout from your application and try to access `http://localhost:8000/tasks`. You will be redirect to login page if you're not logged in yet.
 
+The other way to setup the middleware is as following:
+
+	Route::get('profile','UsersControllers@profile')->middleware(['auth']);
+
 # How to create one-to-many relationship
 
 ## Create migration script
