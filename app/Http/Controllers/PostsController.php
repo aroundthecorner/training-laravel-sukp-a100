@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 
 use App\Post;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -19,7 +20,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderby('created_at','desc')->paginate(5);
+        $posts = Post::where('user_id',Auth::user()->id)->orderby('created_at','desc')->paginate(5);
         return view('posts.index', compact('posts'));
     }
 

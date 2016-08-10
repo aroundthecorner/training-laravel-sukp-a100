@@ -18,8 +18,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="name">Name</label>  
   <div class="col-md-4">
-  <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
-    
+  <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="" value="{{ old('name') }}">
   </div>
 </div>
 

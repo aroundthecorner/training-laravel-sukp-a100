@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
+    use LaratrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -23,4 +25,37 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

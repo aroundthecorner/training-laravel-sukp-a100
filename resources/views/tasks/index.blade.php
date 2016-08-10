@@ -12,7 +12,8 @@
 	<table class="table table-condensed table-hover">
 		<thead>
 			<tr>
-				<th>Name</th>
+				<th>Task</th>
+				<th>Owner</th>
 				<th>Status</th>
 				<th>Description</th>
 				<th>Action</th>
@@ -23,6 +24,7 @@
 			@forelse($tasks as $task)
 			<tr>
 				<td>{{ $task->name }}</td>
+				<td>{{ $task->user->name }}</td>
 				<td>{{ $task->status }}</td>
 				<td>{{ $task->description }}</td>
 				<td class="col-md-3 col-lg-2">

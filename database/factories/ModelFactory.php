@@ -11,6 +11,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Task::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => $faker->randomElement(range(1,30)),
         'name' => $faker->name,
         'description' => $faker->text,
         'status' => $faker->randomElement(['New','In Progress','Done'])
@@ -19,6 +20,7 @@ $factory->define(App\Task::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
+        'user_id' => $faker->randomElement(range(1,30)),
         'name' => $faker->text
     ];
 });

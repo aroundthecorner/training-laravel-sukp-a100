@@ -24,14 +24,13 @@
     @include('partials.navigation')
     
     <div class="container">
+
       {{-- Display Error Messages if any --}}
-      @if (count($errors) > 0)
-          <div class="alert alert-danger">
-              @foreach ($errors->all() as $error)
-                      <p>{{ $error }}</p>
-              @endforeach
-          </div>
-      @endif
+      @forelse($errors->all() as $error)
+        <p class="alert alert-danger">{{ $error }}</p>
+      @empty
+        {{-- display nothing here --}}
+      @endforelse
 
     	@yield('content')
     </div>

@@ -4,6 +4,8 @@ use Illuminate\Database\Seeder;
 
 // include User namespace
 use App\User;
+use App\Post;
+use App\Task;
 
 class UsersSeeder extends Seeder
 {

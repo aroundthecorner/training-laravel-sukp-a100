@@ -30,4 +30,11 @@ class TaskRequest extends Request
             'description' => 'required|min:20'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.min' => 'TIdak cukup patah perkataan. minimum 5 patah perkataan.'
+        ];
+    }
 }
