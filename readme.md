@@ -70,7 +70,7 @@
 	Task::truncate();
 	factory(Task::class, 100)->create();
 
-## Open `database\seeds\DatabaseSeeder`, and update the code to the following
+### Open `database\seeds\DatabaseSeeder`, and update the code to the following
 
 	public function run()
     {
@@ -85,3 +85,25 @@
 ## Start seeding
 
 	php artisan db:seed
+
+## Usage in `resources/views/tasks/index.blade.php`, add in new column
+
+	<td>{{ $task->user->name }}</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
