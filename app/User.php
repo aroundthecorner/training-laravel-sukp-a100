@@ -28,7 +28,13 @@ class User extends Authenticatable
 
     public function tasks()
     {
-        return $this->hasMany('App\Task');
+        if($this->hasRole('administrator')) {
+            return $this->hasMany('App\Task');
+        }
+
+        if($this->hasRole('staff')) {
+           return $this->hasMany('App\Task','assignee_id'); 
+        }
     }
 
     public function posts()
