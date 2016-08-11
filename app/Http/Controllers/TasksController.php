@@ -10,6 +10,8 @@ use App\Http\Requests\TaskRequest;
 
 use App\Task;
 
+use Auth;
+
 class TasksController extends Controller
 {
     /**
@@ -19,7 +21,12 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderby('created_at','desc')->paginate(5);
+        if(Auth::user()->hasRole('administrator')) {
+            $tasks = Task::with('assignee')->orderby('created_at','desc')->paginate(5);
+        } else {
+            $tasks = Task::orderby('created_at','desc')->paginate(5);
+        }
+        
         return view('tasks.index', compact('tasks'));
     }
 
