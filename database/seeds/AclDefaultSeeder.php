@@ -20,12 +20,20 @@ class AclDefaultSeeder extends Seeder
     	
     	DB::table('permission_role')->truncate();
     	DB::table('role_user')->truncate();
+
         // create default roles
         $admin = new Role();
 		$admin->name         = 'administrator';
 		$admin->display_name = 'User Administrator';
-		$admin->description  = 'User is allowed to manage and edit other users'; 
+		$admin->description  = 'User is allowed to manage the whole application'; 
 		$admin->save();
+
+        $staff = new Role();
+        $staff->name         = 'staff';
+        $staff->display_name = 'User Staff';
+        $staff->description  = 'User is allow to manage partial of the application.'; 
+        $staff->save();
+
         // create default permissions
         $permissions = [
         	[
@@ -48,7 +56,28 @@ class AclDefaultSeeder extends Seeder
         		'display_name' => 'Delete User',
         		'description' => 'User who are allowed to delete user'
         	],
+            [
+                'name' => 'task-create',
+                'display_name' => 'Create Task',
+                'description' => 'User who are allowed to add new task'
+            ],
+            [
+                'name' => 'task-read',
+                'display_name' => 'Read Task',
+                'description' => 'User who are allowed to read task'
+            ],
+            [
+                'name' => 'task-update',
+                'display_name' => 'Update Task',
+                'description' => 'User who are allowed to update new task'
+            ],
+            [
+                'name' => 'task-delete',
+                'display_name' => 'Delete Task',
+                'description' => 'User who are allowed to delete task'
+            ],
         ];
+
         foreach ($permissions as $key => $value) {
         	$permission = new Permission();
 			$permission->name         = $value['name'];
@@ -58,7 +87,12 @@ class AclDefaultSeeder extends Seeder
 			
 			// assign permission to roles
 			$admin->attachPermission($permission);
+
+            if(in_array($value['name'], ['task-update','task-read'])) {
+                $staff->attachPermission($permission);
+            }
         }
+
         // create default user and attach admin role to the user
         $user = new User();
         $user->name = 'Administrator';
@@ -68,5 +102,37 @@ class AclDefaultSeeder extends Seeder
         $user->save();
         
         $user->attachRole($admin);
+
+        for ($i=0; $i < 5; $i++) { 
+            $user = new User();
+            $user->name = 'Administrator '.$i;
+            $user->email = str_random(10).'@system.com';
+            $user->password = bcrypt('password');
+            $user->remember_token = str_random(10);
+            $user->save();
+            
+            $user->attachRole($admin);
+        }
+
+        $user = new User();
+        $user->name = 'Staff';
+        $user->email = 'staff@system.com';
+        $user->password = bcrypt('password');
+        $user->remember_token = str_random(10);
+        $user->save();
+        
+        $user->attachRole($staff);
+
+        for ($i=0; $i < 10; $i++) { 
+            $user = new User();
+            $user->name = 'Staff '.$i;
+            $user->email = str_random(10).'@system.com';
+            $user->password = bcrypt('password');
+            $user->remember_token = str_random(10);
+            $user->save();
+            
+            $user->attachRole($staff);
+        }
+        
     }
 }
