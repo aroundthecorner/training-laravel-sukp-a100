@@ -3,9 +3,12 @@
 @section('title', 'Task List')
 
 @section('content')
-	<a href="{{ url('/tasks/create') }}" class="btn btn-success btn-sm">
-		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-	</a>
+	@if(Auth::user()->can('task-create'))
+		<a href="{{ url('/tasks/create') }}" class="btn btn-success btn-sm">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+		</a>
+	@endif
+
 	<div class="pull-right">
 		{{ $tasks->links() }}
 	</div>
@@ -13,7 +16,9 @@
 		<thead>
 			<tr>
 				<th>Task</th>
-				<th>Owner</th>
+				@if(Auth::user()->hasRole('administrator'))
+					<th>Assignee</th>
+				@endif
 				<th>Status</th>
 				<th>Description</th>
 				<th>Action</th>
@@ -24,7 +29,11 @@
 			@forelse($tasks as $task)
 			<tr>
 				<td>{{ $task->name }}</td>
-				<td>{{ $task->user->name }}</td>
+				
+				@if(Auth::user()->hasRole('administrator'))
+					<td>{{ $task->assignee->name }}</td>
+				@endif
+
 				<td>{{ $task->status }}</td>
 				<td>{{ $task->description }}</td>
 				<td class="col-md-3 col-lg-2">
@@ -36,13 +45,14 @@
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 					</a>
 
-					<a href="{{ url('/tasks/'.$task->id) }}" class="btn btn-danger btn-sm" 
-					data-method="delete" 
-					data-token="{{csrf_token()}}" 
-					data-confirm="Are you sure?">
-						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-					</a>
-
+					@if(Auth::user()->can('task-delete'))
+						<a href="{{ url('/tasks/'.$task->id) }}" class="btn btn-danger btn-sm" 
+						data-method="delete" 
+						data-token="{{csrf_token()}}" 
+						data-confirm="Are you sure?">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</a>
+					@endif
 				</td>
 			</tr>
 			@empty

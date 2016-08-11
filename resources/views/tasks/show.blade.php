@@ -9,12 +9,14 @@
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 	</a>
 
-	<a href="{{ url('/tasks/'.$task->id) }}" class="btn btn-danger btn-sm" 
-	data-method="delete" 
-	data-token="{{csrf_token()}}" 
-	data-confirm="Are you sure?">
-		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-	</a>
+	@if(Auth::user()->can('task-delete'))
+		<a href="{{ url('/tasks/'.$task->id) }}" class="btn btn-danger btn-sm" 
+		data-method="delete" 
+		data-token="{{csrf_token()}}" 
+		data-confirm="Are you sure?">
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+		</a>
+	@endif
 @endsection
 
 @section('scripts')

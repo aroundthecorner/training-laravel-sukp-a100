@@ -21,8 +21,11 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/home') }}">Home</a></li>
                 @unless(Auth::guest())
-                    <li><a href="{{ url('/posts') }}">My Posts</a></li>
-                    <li><a href="{{ url('/users') }}">Users Manager</a></li>
+                    
+                    @if(Auth::user()->hasRole('administrator') == true)
+                        <li><a href="{{ url('/users') }}">Users Manager</a></li>
+                    @endif
+
                     <li><a href="{{ url('/tasks') }}">Tasks Manager</a></li>
                 @endunless
             </ul>
